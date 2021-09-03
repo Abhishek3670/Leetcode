@@ -8,19 +8,22 @@
 class Solution
 {
 public:
-    vector<vector<int>> combinationSum(vector<int> &candidates, int target)
+    int knapsack(vector<int> &array, int target, int n)
     {
-        int n = candidates.size();
-        int W = target;
-        int t[n + 1][W + 1];
+        int t[n + 1][target + 1];
         memset(t, 0, sizeof(t));
         for (int i = 1; i < n + 1; i++)
-            for (int j = 1; j < W + 1; j++)
-                if (candidates[i - 1] <= j)
-                    t[i][j] = t[i][j - candidates[i - 1]] + t[i - 1][j];
+            for (int j = 1; j < target + 1; j++)
+                if (array[i] <= j)
+                    t[i][j] = max(t[i][j - array[i]], t[i][j - 1]);
                 else
-                    t[i][j] = t[i - 1][j];
-        cout << t[n][W];
+                    t[i][j] = t[i][j - 1];
+        return t[n][target];
+    }
+    vector<vector<int>> combinationSum(vector<int> &candidates, int target)
+    {
+       
+        cout << knapsack(candidates, target, candidates.size() - 1);
         return {};
     }
 };

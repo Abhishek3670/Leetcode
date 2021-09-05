@@ -8,6 +8,23 @@
 class Solution
 {
 public:
+    // Optimal approach using sort O(nlogn)
+    string solve(vector<string> &a)
+    {
+        int n = a.size();
+        if (n == 0)
+            return "";
+        string ans = "";
+        sort(a.begin(), a.end());
+        string l = a[0];
+        string r = a[n - 1];
+        for (int i = 0; i < l.size(); i++)
+            if (l[i] == r[i])
+                ans += r[i];
+            else
+                break;
+        return ans;
+    }
     string commonPrefix(string s1, string s2)
     {
         int n = s1.size();

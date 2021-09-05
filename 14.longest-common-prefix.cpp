@@ -8,32 +8,25 @@
 class Solution
 {
 public:
+    string commonPrefix(string s1, string s2)
+    {
+        int n = s1.size();
+        int m = s2.size();
+        string com = "";
+        for (int i = 0; i < min(n, m); i++)
+            if (s1[i] == s2[i])
+                com += s1[i];
+            else
+                return com;
+        return com;
+    }
     string longestCommonPrefix(vector<string> &strs)
     {
-        map<char, int> ans;
-        string t = "";
-        int maxi = INT_MIN;
-        if (strs.size() == 1)
-            return strs[0];
-        for (int i = 0; i < strs.size() - 1; i++)
-        {
-            t = strs[i];
-            for (int j = 0; j < strs[i + 1].size(); j++)
-            {
-                string temp = strs[i + 1];
-                if (t[j] == temp[j])
-                    ans[t[j]]++;
-                else
-                    break;
-            }
-        }
-        t = "";
-        for (auto &i : ans)
-            maxi = max(maxi, i.second);
-        for (auto &i : ans)
-            if (i.second == maxi)
-                t += i.first;
-        return t;
+        int n = strs.size();
+        string commonString = strs[0];
+        for (int i = 1; i < n; i++)
+            commonString = commonPrefix(commonString, strs[i]);
+        return commonString;
     }
 };
 // @lc code=end

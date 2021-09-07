@@ -10,15 +10,24 @@ class Solution
 public:
     int divide(int dividend, int divisor)
     {
-        int j = abs(dividend);
-        int i = abs(divisor);
-        int l = i;
-        int r = j;
-        int count = 0;
-        while (l < r)
+        if (dividend == INT_MIN && divisor == -1)
         {
-            rem = l+i;
+            return INT_MAX;
         }
+        long dvd = labs(dividend), dvs = labs(divisor), ans = 0;
+        int sign = dividend > 0 ^ divisor > 0 ? -1 : 1;
+        while (dvd >= dvs)
+        {
+            long temp = dvs, m = 1;
+            while (temp << 1 <= dvd)
+            {
+                temp <<= 1;
+                m <<= 1;
+            }
+            dvd -= temp;
+            ans += m;
+        }
+        return sign * ans;
     }
 };
 // @lc code=end

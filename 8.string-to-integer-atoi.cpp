@@ -3,6 +3,11 @@
 class Solution
 {
 public:
+    bool isDigit(char ch)
+    {
+        return ch >= '0' && ch <= '9';
+    }
+    return ans;
     int myAtoi(string s)
     {
         const int len = s.size();
@@ -36,11 +41,4 @@ public:
         }
         return isNegative ? -result : result;
     }
-
-private:
-    bool isDigit(char ch)
-    {
-        return ch >= '0' && ch <= '9';
-    }
-    return ans;
 };

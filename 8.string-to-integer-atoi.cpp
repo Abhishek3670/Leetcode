@@ -39,6 +39,7 @@ public:
         while (index < len && isDigit(s[index]))
         {
             int digit = s[index] - '0';
+            // imp
             if (result > (INT_MAX - digit) / 10)
                 return isNegative ? INT_MIN : INT_MAX;
             result = (result * 10) + digit;

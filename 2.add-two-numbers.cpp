@@ -18,48 +18,34 @@
 class Solution
 {
 public:
-    ListNode *reverseList(ListNode *list)
-    {
-        ListNode *curr = list;
-        ListNode *prev = NULL;
-        ListNode *n;
-        while (curr != NULL)
-        {
-            n = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = n;
-        }
-        return prev;
-    }
-
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
     {
-        l1 = reverseList(l1);
-        l2 = reverseList(l2);
-        ListNode *curr1 = l1;
-        ListNode *curr2 = l2;
-        ListNode *prev = NULL;
-        ListNode *l3 = NULL;
-        ListNode *n;
-        int sum;
-        int carry = 0;
-        while (curr1 != NULL)
+        int carry = 0, first, second;
+        ListNode *head = new ListNode(0), *tail = head;
+        while (l1 || l2 || carry)
         {
-            sum = curr1->val + curr2->val + carry;
-            if (sum >= 10)
+            if (l1)
             {
-                carry = sum / 10;
-                sum %= 10;
+                first = l1->val;
+                l1 = l1->next;
             }
             else
-                carry = 0;
-            cout << sum << endl;
-            curr1 = curr1->next;
-            curr2 = curr2->next;
+                first = 0;
+
+            if (l2)
+            {
+                second = l2->val;
+                l2 = l2->next;
+            }
+            else
+                second = 0;
+
+            int temp = first + second + carry;
+            tail->next = new ListNode(temp % 10);
+            tail = tail->next;
+            carry = temp / 10;
         }
-        // cout<<l3->val;
-        return l3;
+        return head->next;
     }
 };
 // @lc code=end

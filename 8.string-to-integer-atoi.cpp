@@ -1,19 +1,46 @@
-/*
- * @lc app=leetcode id=8 lang=cpp
- *
- * [8] String to Integer (atoi)
- */
 
-// @lc code=start
-class Solution {
+
+class Solution
+{
 public:
-    int myAtoi(string s) {
-        for(auto i : s)
+    int myAtoi(string s)
+    {
+        const int len = s.size();
+        if (len == 0)
+            return 0;
+        int index = 0;
+        while (index < len && s[index] == ' ')
+            ++index;
+        bool isNegative = false;
+
+        if (index < len)
         {
-            if(i != )
-
+            if (s[index] == '-')
+            {
+                isNegative = true;
+                ++index;
+            }
+            else if (s[index] == '+')
+                ++index;
         }
-    }
-};
-// @lc code=end
 
+        int result = 0;
+
+        while (index < len && isDigit(s[index]))
+        {
+            int digit = s[index] - '0';
+            if (result > (INT_MAX - digit) / 10)
+                return isNegative ? INT_MIN : INT_MAX;
+            result = (result * 10) + digit;
+            ++index;
+        }
+        return isNegative ? -result : result;
+    }
+
+private:
+    bool isDigit(char ch)
+    {
+        return ch >= '0' && ch <= '9';
+    }
+    return ans;
+};

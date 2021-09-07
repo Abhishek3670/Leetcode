@@ -1,5 +1,10 @@
+/*
+ * @lc app=leetcode id=8 lang=cpp
+ *
+ * [8] String to Integer (atoi)
+ */
 
-
+// @lc code=start
 class Solution
 {
 public:
@@ -7,7 +12,7 @@ public:
     {
         return ch >= '0' && ch <= '9';
     }
-    return ans;
+ 
     int myAtoi(string s)
     {
         const int len = s.size();
@@ -42,3 +47,4 @@ public:
         return isNegative ? -result : result;
     }
 };
+// @lc code=end

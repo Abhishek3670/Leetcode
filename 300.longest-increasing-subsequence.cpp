@@ -8,30 +8,34 @@
 class Solution
 {
 public:
+    int binarySearch(vector<int> arr, int l, int h, int k)
+    {
+        if (k > arr[h])
+            return h + 1;
+        while (l < h)
+        {
+            int mid = (l + h) / 2;
+            if (arr[mid] == k)
+                return mid;
+            else if (arr[mid] > k)
+                h = mid;
+            else
+                l = mid + 1;
+        }
+        return h;
+    }
     int lengthOfLIS(vector<int> &nums)
     {
-        int maxi = INT_MIN;
-        for (int i = 0; i < nums.size(); i++)
+        int lastIndex = 0;
+        vector<int> res(nums.size());
+        res[0] = nums[0];
+        for (int i = 1; i < nums.size(); i++)
         {
-            int l = i + 1;
-            int r = i;
-            int count = 1;
-            while (l < nums.size() && r < nums.size())
-            {
-                if (nums[r] < nums[l])
-                {
-
-                    count++;
-                    // cout << count;
-                    r = l;
-                    l++;
-                }
-                else
-                    l++;
-            }
-            maxi = max(count, maxi);
+            int index = binarySearch(res, 0, lastIndex, nums[i]);
+            res[index] = nums[i];
+            lastIndex = max(lastIndex, index);
         }
-        return maxi;
+        return lastIndex + 1;
     }
 };
 // @lc code=end
